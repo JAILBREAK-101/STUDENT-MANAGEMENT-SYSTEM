@@ -1,0 +1,248 @@
+:root {
+    --primary-color: hsl(226, 43%, 10%);
+    --primary-color-outline: hsl(226, 25%, 30%);
+    --primary-color-hover: hsl(226, 20%, 45%);
+    --primary-color-outline-hover: ;
+
+    --secondary-color: hsl(15, 100%, 70%);
+    --secondary-color-outline: hsl(15, 40%, 40%);
+    --secondary-color-hover: hsl(15, 90%, 85%);
+    --secondary-color-outline-hover: ;
+
+    --text-color: hsl(226, 43%, 10%);
+    --bold-text-color: hsl(0, 0%, 0%);
+    --faint-text-color: hsl(240, 2%, 16%);
+
+    --page-background-color: hsl(236, 100%, 87%);
+    --red-color: hsl(0, 91%, 45%);
+    --green-color: hsl(122, 71%, 44%);
+    --black-color: hsl(0, 0%, 0%);
+    --white-color: hsl(0, 0%, 100%);
+    --grey-color: ;
+
+    --form-bg-color: hsl(60, 3%, 94%);
+
+    --text-margin-top: 0.2rem;
+    --text-margin-bottom: 0.4rem;
+
+    --border-radius: 10px;
+
+    --button-transition: all 0.2s ease;
+    --form-control-transition: all 0.3s ease;
+
+    --mobile-viewport: 480px;
+    --tablet-viewport: 900px;
+    --desktop-viewport: 1280px;
+}
+
+.d-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.d-grid {
+    display: grid;
+    vertical-align: middle;
+    gap: 0.4rem;
+}
+
+/* nav-bar */
+.nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav__list {
+    display: inherit;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 1rem 0.5rem 0 0;
+}
+
+.nav__item {
+    padding: 0.5em 0.3em;
+    transition: 0.4s translate ease;
+
+    &:hover {
+        translate: (0, 2px);
+        font-weight: 600;
+    }
+}
+
+.nav-link {
+    color: var(--primary-color);
+}
+
+.navIsHidden {
+    display: hidden;
+}
+
+.col-1 {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.col-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.col-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.col-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.clr-white {
+    color: var(--white-color);
+}
+
+.clr-black {
+    color: var(--black-color);
+}
+
+.clr-red {
+    color: var(--red-color);
+}
+
+.clr-green {
+    color: var(--green-color);
+}
+
+.clr-grey {
+    color: var(--grey-color);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+:is(.form-error,
+    .error input,
+    .success input):focus,
+:focus-visible {
+    outline: none;
+}
+
+.form-error {
+    color: var(--red-color);
+    font-weight: 600;
+}
+
+.error input {
+    border: 2px solid var(--red-color);
+}
+
+.success input {
+    border: 2px solid var(--green-color);
+}
+
+.form-control {
+    display: block;
+    padding: 1rem;
+    font-size: 17px;
+    color: var(--text-color);
+    margin-top: 0.3rem;
+    border: 1px solid var(--white-color);
+    border-radius: 5px;
+    transition: var(--form-control-transition);
+}
+
+.form-control:hover {
+    border: 1px solid var(--primary-color);
+}
+
+.form-control:focus,
+.form-control:focus-visible {
+    outline: 1px solid var(--primary-color);
+}
+
+.form-label {
+    font-size: 14px;
+    margin-top: 0.1rem;
+}
+
+.button {
+    background-color: var(--white-color);
+    padding: 0.6rem;
+    border-radius: var(--border-radius);
+    outline: 1px solid var(--text-color);
+    transition: var(--button-transition);
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.primary-button:hover {
+    background-color: var(--primary-color-hover);
+    color: var(--white-color);
+}
+
+.primary-button:focus,
+.primary-button:focus-visible {
+    outline: 1px solid var(--primary-color-outline)
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    font-weight: 600;
+}
+
+.secondary-button:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+.secondary-button:focus,
+.secondary-button:focus-visible {
+    outline: 1px solid var(--secondary-color-outline)
+}
+
+.red-button {
+    background-color: var(--red-color);
+}
+
+.green-button {
+    background-color: var(--green-color);
+}
+
+.button--icon {
+    background-color: var(--white-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--border-radius);
+    transition: var(--button-transition);
+
+    &:hover {
+        background-color: var(--primary-color-hover);
+
+        &>i {
+            color: var(--white-color);
+        }
+    }
+}
+
+.info-text {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.small {
+    font-size: 0.7rem;
+}
+
+.medium {
+    font-size: 1.2rem;
+}
+
+.big {
+    font-size: 1.5rem;
+    font-weight: 600;
+}

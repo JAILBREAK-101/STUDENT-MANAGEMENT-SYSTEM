@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+
+    <!-- styles -->
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="./styles/utilities.css">
+
+    <!-- fonts -->
+
+    <!-- icons -->
+    <script defer src="https://kit.fontawesome.com/ae93883ba7.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="app">
+
+            <div class="header">
+                <div class="header__content">
+                    <h2 class="header__text">Student Management System</h2>
+                    <p class="crl-black header_text-description">Grade Calculator <i
+                            class="fa-duotone fa-calculator"></i></p>
+                </div>
+
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#" class="nav__link">Dashboard</a></li>
+                        <li class="nav__item"><a href="#" class="nav__link">Features</a></li>
+                        <li class="nav__item"><a href="#" class="nav__link">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="body">
+                <div class="data-form">
+                    <p class="info-text big">Kindly enter the student's credentials</p>
+                    <form action="#" method="post" data-form class="d-flex flex-column">
+                        <div class="d-flex col-2">
+                            <div class="form-group">
+                                <label class="form-label" for="score">Student's Name</label>
+                                <input type="text" id="score" data-name class="name form-control"
+                                    placeholder="Enter the student's name">
+                                <div class="form-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="name">Student's Score</label>
+                                <input type="text" id="name" data-score class="score form-control"
+                                    placeholder="Enter the student's score">
+                                <div class="form-error"></div>
+                            </div>
+                        </div>
+
+                        <small class="info-text small clr-grey">Click on the button below to add the student</small>
+                        <input class="button primary-button clr-white span-2" data-add-btn type="submit"
+                            value="Add Student" />
+                    </form>
+                </div>
+
+                <div class="data">
+                    <div class="data-content">
+                        <div class="data-content__header">
+                            <h3 class="data-content__text">Students <span class="student-count"></span></h3>
+                        </div>
+
+                        <div class="data__list">
+                            <!-- dynamic data coming from JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-wrapper">
+            <div class="edit-modal">
+
+            </div>
+
+            <div class="delete-modal">
+
+            </div>
+        </div>
+    </div>
+    <script src="../public/build/script.js"></script>
+</body>
+
+</html>

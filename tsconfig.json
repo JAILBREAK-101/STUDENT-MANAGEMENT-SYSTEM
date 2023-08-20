@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src/ts/script.ts",
+        "outDir": "./public/build/script.js"
+    }
+}
