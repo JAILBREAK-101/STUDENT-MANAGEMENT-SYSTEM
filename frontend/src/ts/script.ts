@@ -23,6 +23,7 @@ let studentCount: any = document.querySelector('.student-count');
 studentCount.textContent = '0';
 const dataForm: HTMLFormElement = document.querySelector("[data-form]")!;
 let studentsData!: StudentObject;
+// let grade: studentGrade = "";
 
 /* Event Listeners */
 dataForm.addEventListener('submit', (e: Event) => {
@@ -32,7 +33,7 @@ dataForm.addEventListener('submit', (e: Event) => {
 
 /* Functions */
 
-    /*  Utility Validation Functions */
+    /*  Utility Validation Functions ==============*/
 
     const isRequired = (value: string): boolean => value === "" ? false : true;
 
@@ -98,53 +99,54 @@ dataForm.addEventListener('submit', (e: Event) => {
         const formError = document.querySelector(`.${input.className.split(" ")[0]} + .form-error`)
         formError.textContent = ''
     }
+    /* ============ Utility Vallidation Functions */
 
-    const validateStudentName = (name: HTMLInputElement): boolean => {
-        // checking if our form is valid
-        let isValid: boolean = false;
-        const min: number = 3, max: number = 20
-        
-        // Check if there's a value present
-        if(!isRequired(name.value.trim())) {
-            displayError(name, "Student's Name cannot be blank.")
-        }
-        else if(!isBetween(name, min, max)) {
-            displayError(name, `Student's Name must be between ${min} and ${max} characters.`)
-        }
-        else if(!isNaN(Number(name.value))) {
-            displayError(name, "Student Name should be letters and not numbers")
-        }
-        else {
-            displaySuccess(name)
-            isValid = true;
-        }
-        return isValid
+const validateStudentName = (name: HTMLInputElement): boolean => {
+    // checking if our form is valid
+    let isValid: boolean = false;
+    const min: number = 3, max: number = 20
+    
+    // Check if there's a value present
+    if(!isRequired(name.value.trim())) {
+        displayError(name, "Student's Name cannot be blank.")
     }
-
-    const validateStudentScore = (score: HTMLInputElement): boolean => {
-        // checking if our form is valid
-        let isValid = false;
-        const min: number = 1, max: number = 3;
-        const minVal: number = 1, maxVal: number = 100;
-
-        if (!isRequired(score.value.trim())) {
-            displayError(score, "Student's Score cannot be blank.")
-        }
-        else if (!isBetween(score, min, max)) {
-            displayError(score, `Student score should not be between ${min} and ${max} characters.`)
-        }
-        else if(!isInRange(score, 1, 100)) {
-            displayError(score, `Student score should be between ${minVal} and ${maxVal}.`)
-        }
-        else if(isNaN(Number(score.value))) {
-            displayError(score, "Student Score should be numbers and not letters")
-        }
-        else {
-            displaySuccess(score)
-            isValid = true
-        }
-        return isValid
+    else if(!isBetween(name, min, max)) {
+        displayError(name, `Student's Name must be between ${min} and ${max} characters.`)
     }
+    else if(!isNaN(Number(name.value))) { /* added - manual*/
+        displayError(name, "Student Name should be letters and not numbers")
+    }
+    else {
+        displaySuccess(name)
+        isValid = true;
+    }
+    return isValid
+}
+
+const validateStudentScore = (score: HTMLInputElement): boolean => {
+    // checking if our form is valid
+    let isValid = false;
+    const min: number = 1, max: number = 3;
+    const minVal: number = 1, maxVal: number = 100;
+
+    if (!isRequired(score.value.trim())) {
+        displayError(score, "Student's Score cannot be blank.")
+    }
+    else if (!isBetween(score, min, max)) {
+        displayError(score, `Student score should not be between ${min} and ${max} characters.`)
+    }
+    else if(!isInRange(score, 1, 100)) { /* added - manual*/
+        displayError(score, `Student score should be between ${minVal} and ${maxVal}.`)
+    }
+    else if(isNaN(Number(score.value))) { /* added - manual*/
+        displayError(score, "Student Score should be numbers and not letters")
+    }
+    else {
+        displaySuccess(score)
+        isValid = true
+    }
+    return isValid
+}
 
 const incrementCount= (count: number): number => {
     studentCount.textContent = count++;
@@ -158,7 +160,7 @@ const decrementCount = (count: number): number => {
 
 const openModal = () => {}
 
-const editStudentData = (studentElementIndex: number, nameValue: string, scoreValue: number) => {
+const editStudentData = (nameValue: string, scoreValue: number) => {
     const editModalContent = `
         <div class="modal-content">
             <div class="modal-content__header">
@@ -208,31 +210,40 @@ const storeStudentData = (props: StudentObject) => {}
 
 const displayStudentData = () => {}
 
-const determineGrade = (score: number, grade: string): string => {
+const determineGrade = (score: number, data: StudentObject): string => {
 
+    // pass in data for storage
     if (score >= 85 && score <= 100) {
-        grade = "A"
+        return "A"
     }
     else if (score >= 75 && score <= 84) {
-        grade = "B"
+        return "B"
     }
     else if (score >= 60 && score <= 74) {
-        grade = "C"
+        return "C"
     }
     else if (score >= 50 && score <= 59) {
-        grade = "D"
+        return "D"
     }
     else if (score >= 40 && score <= 49) {
-        grade = "E"
+        return "E"
     }
-    else if (score < 40) {
-        grade = "F"
+    else if (score < 40) {        // data.grade = "F"
+        return "F"
     }
     else {
-        grade = "Invalid"
+        return "Invalid"
     }
 
-    return grade;
+    // Bind to the variable grade after the grade has been computed
+    // const student__grade: string = document.querySelector('.student__grade').
+    // innerHTML = `<span>Grade: ${grade}</span>`;
+};
+
+const displayGrade = (score: number, data: StudentObject) => {
+    const student__grade: string = determineGrade(score, data);
+    const studentGradeElement: HTMLSpanElement = document.querySelector(`.grade-${score}`)
+    studentGradeElement.textContent = `Grade: ${student__grade}`
 }
 
 const appendStudent = (): StudentObject => {
@@ -251,7 +262,6 @@ const appendStudent = (): StudentObject => {
         studentsData = {
             name: studentNameValue, 
             score: studentScoreValue,
-            // grade: ""
         }
 
         const resultList: HTMLDivElement = document.querySelector(".data__list");
@@ -259,23 +269,21 @@ const appendStudent = (): StudentObject => {
         const studentEl: HTMLDivElement = document.createElement('div');
         studentEl.classList.add('student');
         studentEl.innerHTML = 
-                // ${studentsData.grade == "" ? "N/A" : 
-                // resultList.children.length === 0 ? "<p>No Students added</p>" :  
+            // ${studentsData.grade == "" ? "N/A" : 
+            // resultList.children.length === 0 ? "<p>No Students added</p>" :  
         `
             <div class="student__details">
                 <span class="student__name">Name: ${studentsData.name}</span>
                 <span class="student__score">Score: ${studentsData.score}</span>
-                <span class="student__grade">Grade: 
-                ${!studentsData.grade ? 'N/A' : studentsData.grade}</span>
+                <span class="grade-${studentsData.score}"></span>
             </div>
             <div class="student-action">
-            // <button onclick="" class="calculate-btn">Calculate Grade</button>
-            <button onclick="" class="edit-btn"><i class="fa-duotone fa-pen-to-square"></i></button>
-            <button onclick="" class="delete-btn"><i class="fa-duotone fa-trash"></i></button>
+            <button onclick = "displayGrade(${studentsData.score, studentsData.grade})" class="calculate-btn">Calculate Grade</button>
+            <button class="edit-btn"><i class="fa-duotone fa-pen-to-square"></i></button>
+            <button class="delete-btn"><i class="fa-duotone fa-trash"></i></button>
             </div>
         `
             /* use template string literals for data and values, not javascript events */
-            // <button onclick="${determineGrade(studentsData.score, studentsData.grade)}" class="calculate-btn">Calculate Grade</button>
         
         resultList.append(studentEl);
 
@@ -288,6 +296,5 @@ const appendStudent = (): StudentObject => {
         return studentsData
     }
 }
-
 
 /* Extras */
